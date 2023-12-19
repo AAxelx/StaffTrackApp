@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE GetAllEmployeesWithFilters
+﻿CREATE PROCEDURE GetEmployees
 (
     @DepartmentId INT = NULL,
     @Position NVARCHAR(50) = NULL,
