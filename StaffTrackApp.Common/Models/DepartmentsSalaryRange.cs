@@ -2,7 +2,7 @@
 
 namespace StaffTrackApp.Common.Models
 {
-    public class DepartmentsSalaryRanges
+    public class DepartmentsSalaryRange
     {
         public int DepartmentID { get; set; }
         public string DepartmentName { get; set; }
