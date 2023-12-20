@@ -5,6 +5,7 @@ using StaffTrackApp.DAL.DataAccess.Abstractions;
 using System.Data;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Options;
+using StaffTrackApp.Common.Models.Requests;
 
 
 namespace StaffTrackApp.DAL.DataAccess
@@ -24,7 +25,7 @@ namespace StaffTrackApp.DAL.DataAccess
             _mapper = mapper;
         }
 
-        public async Task<Employee> GetEmployeeById(int employeeId)
+        public async Task<Employee> GetEmployeeByIdAsync(int employeeId)
         {
             var parameter = new SqlParameter("@EmployeeId", SqlDbType.Int) { Value = employeeId };
             var result = await _proceduresHelper.ExecuteStoredProcedureAsync("GetEmployeeById", [parameter]);
@@ -33,14 +34,14 @@ namespace StaffTrackApp.DAL.DataAccess
             return employee;
         }
 
-        public async Task<List<Employee>> GetEmployees(int? departmentId, string position, string name)
+        public async Task<List<Employee>> GetEmployeesAsync(GetEmployeesRequest request)
         {
             SqlParameter[] parameters =
-                {
-                    new("@DepartmentId", SqlDbType.Int) { Value = departmentId.HasValue ? departmentId.Value : DBNull.Value },
-                    new("@Position", SqlDbType.NVarChar) { Value = string.IsNullOrEmpty(position) ? DBNull.Value : position },
-                    new("@Name", SqlDbType.NVarChar) { Value = string.IsNullOrEmpty(name) ? DBNull.Value : name }
-                };
+            {
+                new("@DepartmentId", SqlDbType.Int) { Value = request.DepartmentId.HasValue ? request.DepartmentId.Value : DBNull.Value },
+                new("@Position", SqlDbType.NVarChar) { Value = string.IsNullOrEmpty(request.Position) ? DBNull.Value : request.Position },
+                new("@Name", SqlDbType.NVarChar) { Value = string.IsNullOrEmpty(request.Name) ? DBNull.Value : request.Name }
+            };
 
             var result = await _proceduresHelper.ExecuteStoredProcedureAsync("GetEmployees", parameters);
 
@@ -56,11 +57,11 @@ namespace StaffTrackApp.DAL.DataAccess
             return departmentInfos;
         }
 
-        public async Task<List<DepartmentsSalaryRanges>> GetDepartmentsSalaryRangesAsync()
+        public async Task<List<DepartmentsSalaryRange>> GetDepartmentsSalaryRangesAsync()
         {
             var result = await _proceduresHelper.ExecuteStoredProcedureAsync("GetDepartmentsSalaryRanges");
 
-            var departmentsSalaryRanges = _mapper.Map<List<DepartmentsSalaryRanges>>(result.AsEnumerable());
+            var departmentsSalaryRanges = _mapper.Map<List<DepartmentsSalaryRange>>(result.AsEnumerable());
             return departmentsSalaryRanges;
         }
 
@@ -73,13 +74,13 @@ namespace StaffTrackApp.DAL.DataAccess
             return companyInfo;
         }
 
-        public async Task<List<SalaryReport>> GetSalaryReport(int? departmentId = null, DateTime? startDate = null, DateTime? endDate = null)
+        public async Task<List<SalaryReport>> GetSalaryReportAsync(GetSalaryReportRequest request)
         {
             var parameters = new List<SqlParameter>
             {
-                new SqlParameter("@DepartmentId", SqlDbType.Int) { Value = departmentId.HasValue ? departmentId.Value : DBNull.Value },
-                new SqlParameter("@StartDate", SqlDbType.Date) { Value = startDate.HasValue ? startDate.Value : DBNull.Value },
-                new SqlParameter("@EndDate", SqlDbType.Date) { Value = endDate.HasValue ? endDate.Value : DBNull.Value }
+                new SqlParameter("@DepartmentId", SqlDbType.Int) { Value = request.DepartmentId.HasValue ? request.DepartmentId : DBNull.Value },
+                new SqlParameter("@StartDate", SqlDbType.Date) { Value = request.StartDate },
+                new SqlParameter("@EndDate", SqlDbType.Date) { Value = request.EndDate }
             };
 
             var result = await _proceduresHelper.ExecuteStoredProcedureAsync("GetSalaryReport", parameters.ToArray());
@@ -88,7 +89,7 @@ namespace StaffTrackApp.DAL.DataAccess
             return salaryReports;
         }
 
-        public async Task UpdateEmployeeDetails(Employee updatedEmployee)
+        public async Task UpdateEmployeeDetailsAsync(Employee updatedEmployee)
         {
             SqlParameter[] parameters =
             {
@@ -111,21 +112,5 @@ namespace StaffTrackApp.DAL.DataAccess
         {
             await _proceduresHelper.ExecuteStoredProcedureAsync("RemoveDuplicateEmployees");
         }
-
-        public async Task<List<Employee>> ExportEmployees(int? departmentId, string position, string name)
-        {
-            SqlParameter[] parameters =
-                {
-                    new("@DepartmentId", SqlDbType.Int) { Value = departmentId.HasValue ? departmentId.Value : DBNull.Value },
-                    new("@Position", SqlDbType.NVarChar) { Value = string.IsNullOrEmpty(position) ? DBNull.Value : position },
-                    new("@Name", SqlDbType.NVarChar) { Value = string.IsNullOrEmpty(name) ? DBNull.Value : name }
-                };
-
-            var result = await _proceduresHelper.ExecuteStoredProcedureAsync("GetEmployees", parameters);
-
-            //use helper for exporting to txt file
-            //return employees;
-        }
-
     }
 }

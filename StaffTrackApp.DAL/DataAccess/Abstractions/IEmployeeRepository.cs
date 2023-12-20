@@ -1,16 +1,17 @@
 ﻿using StaffTrackApp.Common.Models;
+using StaffTrackApp.Common.Models.Requests;
 
 namespace StaffTrackApp.DAL.DataAccess.Abstractions
 {
     public interface IEmployeeRepository
     {
-        Task<Employee> GetEmployeeById(int employeeId);
-        Task<List<Employee>> GetEmployees(int? departmentId, string position, string name);
+        Task<Employee> GetEmployeeByIdAsync(int employeeId);
+        Task<List<Employee>> GetEmployeesAsync(GetEmployeesRequest request);
         Task<List<DepartmentInfo>> GetAverageSalaryByDepartmentAsync();
-        Task<List<DepartmentsSalaryRanges>> GetDepartmentsSalaryRangesAsync();
+        Task<List<DepartmentsSalaryRange>> GetDepartmentsSalaryRangesAsync();
         Task<CompanyInfo> GetCompanyInfoByIdAsync();
-        Task<List<SalaryReport>> GetSalaryReport(int? departmentId = null, DateTime? startDate = null, DateTime? endDate = null);
-        Task UpdateEmployeeDetails(Employee updatedEmployee);
+        Task<List<SalaryReport>> GetSalaryReportAsync(GetSalaryReportRequest request);
+        Task UpdateEmployeeDetailsAsync(Employee updatedEmployee);
         Task RemoveDuplicateEmployeesAsync();
     }
 }
