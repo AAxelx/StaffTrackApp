@@ -12,9 +12,12 @@ var configurationBuilder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
+var connectionString = builder.Configuration.GetConnectionString("MyDatabaseConnection");
+
 var configuration = configurationBuilder.Build();
 
 builder.Services.AddRazorPages();
+
 builder.Services.Configure<CompanyConfiguration>(configuration.GetSection("CompanyConfig"));
 builder.Services.Configure<ExportConfiguration>(configuration.GetSection("ExportSettings"));
 
@@ -23,6 +26,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddTransient<ITextFileWriter, TextFileWriter>();
 
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+
+builder.Services.AddTransient<IStoredProceduresHelper>(provider => new StoredProceduresHelper(connectionString));
 
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 
