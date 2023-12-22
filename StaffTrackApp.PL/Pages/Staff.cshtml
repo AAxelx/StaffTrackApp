@@ -54,7 +54,6 @@
                     <button type="button" class="btn btn-secondary" onclick="clearFilters()">Clear Filters</button>
                 </div>
             </form>
-
         </div>
         <div class="col-md-10">
             <table class="table table-striped table-bordered">
@@ -108,4 +107,33 @@
 
         document.querySelector('form').submit();
     }
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const value = this.value;
+            const name = this.name;
+
+            let storedValues = JSON.parse(localStorage.getItem('filterValues')) || {};
+            if (this.checked) {
+                storedValues[name] = storedValues[name] ? [...storedValues[name], value] : [value];
+            } else {
+                storedValues[name] = storedValues[name].filter(item => item !== value);
+            }
+            localStorage.setItem('filterValues', JSON.stringify(storedValues));
+        });
+    });
+    window.addEventListener('DOMContentLoaded', function () {
+        const storedValues = JSON.parse(localStorage.getItem('filterValues'));
+
+        if (storedValues) {
+            for (const [name, values] of Object.entries(storedValues)) {
+                values.forEach(value => {
+                    const checkbox = document.querySelector(`input[name="${name}"][value="${value}"]`);
+                    if (checkbox) {
+                        checkbox.checked = true;
+                    }
+                });
+            }
+        }
+    });
+
 </script>

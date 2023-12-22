@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using StaffTrackApp.Common.Models;
 using StaffTrackApp.Common.Models.Requests;
@@ -12,6 +13,13 @@ namespace StaffTrackApp.PL.Pages
         public string EmployeeName { get; set; }
         public List<Position> Positions { get; set; }
         public List<Department> Departments { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public List<int?> SelectedDepartmentIds { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public List<int?> SelectedPositionIds { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string SelectedName { get; set; }
 
         public IEmployeeService _employeeService { get; set; }
         public IDepartmentService _departmentService { get; set; }
