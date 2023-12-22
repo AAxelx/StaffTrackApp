@@ -37,5 +37,22 @@ namespace StaffTrackApp.DAL.DataAccess
 
             return dataTable;
         }
+
+        public DataTable GetDataTableFromList<T>(List<T> list)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Value");
+
+            if (list != null)
+            {
+                foreach (var value in list)
+                {
+                    dt.Rows.Add(value);
+                }
+            }
+
+            return dt;
+        }
+
     }
 }
