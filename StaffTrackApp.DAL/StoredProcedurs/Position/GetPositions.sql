@@ -1,0 +1,6 @@
+﻿CREATE PROCEDURE GetPositions
+AS
+BEGIN
+    SELECT * FROM Positions;
+END;
+GO

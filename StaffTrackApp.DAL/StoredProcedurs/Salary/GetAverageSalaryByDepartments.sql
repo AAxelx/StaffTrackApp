@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE GetAverageSalaryByDepartment
+﻿CREATE PROCEDURE GetAverageSalaryByDepartments
 AS
 BEGIN
     SELECT d.DepartmentID, d.DepartmentName, AVG(e.Salary) AS AverageSalary
