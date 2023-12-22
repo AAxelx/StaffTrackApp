@@ -13,6 +13,5 @@ namespace StaffTrackApp.Common.Models
         public DateTime DateOfBirth { get; set; }
         public DateTime EmploymentDate { get; set; }
         public decimal Salary { get; set; }
-        public int CompanyInfoId { get; set; }
     }
 }
