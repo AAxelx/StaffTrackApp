@@ -7,20 +7,7 @@ namespace StaffTrackApp.PL.Pages
 {
     public class StaffModel : PageModel
     {
-        public List<Employee> Employees { get; set; } = new List<Employee>
-        {
-            new Employee{ 
-                Id = 1,
-                Address = "Kek",
-                DateOfBirth = new DateTime(),
-                DepartmentId = 2,
-                EmploymentDate = new DateTime(),
-                FullName = "Kek",
-                Phone = "066000",
-                PositionId = 2,
-                Salary = 50000 
-            }
-        };
+        public List<Employee> Employees { get; set; }
         public Employee EmployeeForUpdate { get; set; }
         public string EmployeeName { get; set; }
         public List<Position> Positions { get; set; }
@@ -37,12 +24,12 @@ namespace StaffTrackApp.PL.Pages
             _positionService = positionService;
         }
 
-        public async Task OnGetAsync(List<int?> departmentIds, List<int?> positionsIds, string name)
+        public async Task OnGetAsync(List<int?> departmentIds, List<int?> positionIds, string name)
         {
             var getEmployeesRequest = new GetEmployeesRequest
             {
                 DepartmentIds = departmentIds,
-                PositionIds = positionsIds,
+                PositionIds = positionIds,
                 Name = name
             };
 

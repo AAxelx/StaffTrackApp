@@ -1,0 +1,63 @@
+﻿@page "{id}"
+@model EditEmployeeModel
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<h1 class="align-content-center">Edit Employee</h1>
+
+<form method="post" asp-page-handler="OnPost" class="row g-3">
+    <input type="hidden" asp-for="Employee.Id" />
+
+    <div class="col-md-6">
+        <div class="form-group mt-3">
+            <label asp-for="Employee.FullName"></label>
+            <input asp-for="Employee.FullName" class="form-control" />
+            <span asp-validation-for="Employee.FullName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Employee.DepartmentId"></label>
+            <input asp-for="Employee.DepartmentId" class="form-control" />
+            <span asp-validation-for="Employee.DepartmentId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Employee.PositionId"></label>
+            <input asp-for="Employee.PositionId" class="form-control" />
+            <span asp-validation-for="Employee.PositionId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Employee.Salary"></label>
+            <input asp-for="Employee.Salary" class="form-control" />
+            <span asp-validation-for="Employee.Salary" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group mt-3">
+            <label asp-for="Employee.Phone"></label>
+            <input asp-for="Employee.Phone" class="form-control" />
+            <span asp-validation-for="Employee.Phone" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Employee.DateOfBirth"></label>
+            <input asp-for="Employee.DateOfBirth" class="form-control" />
+            <span asp-validation-for="Employee.DateOfBirth" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Employee.EmploymentDate"></label>
+            <input asp-for="Employee.EmploymentDate" class="form-control" />
+            <span asp-validation-for="Employee.EmploymentDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Employee.Address"></label>
+            <input asp-for="Employee.Address" class="form-control" />
+            <span asp-validation-for="Employee.Address" class="text-danger"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Save</button>
+</form>
