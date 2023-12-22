@@ -1,18 +1,21 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using StaffTrackApp.SAL.Services.Abstractions;
 
 namespace StaffTrackApp.PL.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        public string CompanyName { get; set; } = "Ukrposta";
+        public string CompanyInfo { get; set; } = "We are one of the biggest company in Ukraine...";
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IEmployeeService _service { get; set; }
+
+        public IndexModel(IEmployeeService service)
         {
-            _logger = logger;
+            _service = service;
         }
 
-        public void OnGet()
+        public async Task OnGet()
         {
 
         }

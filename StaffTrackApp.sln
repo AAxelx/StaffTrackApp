@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffTrackApp.SAL", "StaffTrackApp.SAL\StaffTrackApp.SAL.csproj", "{D26B02D5-93E4-467C-9B34-19A581A74A96}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffTrackApp.SAL", "StaffTrackApp.SAL\StaffTrackApp.SAL.csproj", "{D26B02D5-93E4-467C-9B34-19A581A74A96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffTrackApp.DAL", "StaffTrackApp.DAL\StaffTrackApp.DAL.csproj", "{5141DB5F-3A88-442F-8732-EA3B0964BA68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffTrackApp.DAL", "StaffTrackApp.DAL\StaffTrackApp.DAL.csproj", "{5141DB5F-3A88-442F-8732-EA3B0964BA68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffTrackApp.PL", "StaffTrackApp.PL\StaffTrackApp.PL.csproj", "{4E5C2111-3B50-47F1-8E13-EBB2ECEAB01F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffTrackApp.PL", "StaffTrackApp.PL\StaffTrackApp.PL.csproj", "{4E5C2111-3B50-47F1-8E13-EBB2ECEAB01F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaffTrackApp.Common", "StaffTrackApp.Common\StaffTrackApp.Common.csproj", "{D55EB9AF-EF6A-4E2D-97F0-6D0D74D07FC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaffTrackApp.Common", "StaffTrackApp.Common\StaffTrackApp.Common.csproj", "{D55EB9AF-EF6A-4E2D-97F0-6D0D74D07FC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
