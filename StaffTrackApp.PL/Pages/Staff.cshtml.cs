@@ -52,8 +52,7 @@ namespace StaffTrackApp.PL.Pages
 
         public async Task UpdateEmployeeAsync(Employee employee)
         {
-            var result = _employeeService.UpdateEmployeeDetailsAsync(employee);
-
+            await _employeeService.UpdateEmployeeDetailsAsync(employee);
         }
     }
 }

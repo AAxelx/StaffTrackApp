@@ -85,7 +85,7 @@
                             <td>@employee.EmploymentDate.ToShortDateString()</td>
                             <td>@employee.Address</td>
                             <td>
-                                <a asp-page="EditEmployee" asp-route-id="@employee.Id">Edit</a>
+                                <a asp-page="EditEmployee" asp-route-id="@employee.Id" class="btn btn-primary" onclick="clearFilters()">Edit</a>
                             </td>
                         </tr>
                     }
@@ -101,12 +101,12 @@
         checkboxes.forEach(function (checkbox) {
             checkbox.checked = false;
         });
-
-        var nameInput = document.getElementById('name');
-        nameInput.value = '';
+        
+        localStorage.removeItem('filterValues');
 
         document.querySelector('form').submit();
     }
+
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
         checkbox.addEventListener('change', function () {
             const value = this.value;
@@ -121,6 +121,7 @@
             localStorage.setItem('filterValues', JSON.stringify(storedValues));
         });
     });
+
     window.addEventListener('DOMContentLoaded', function () {
         const storedValues = JSON.parse(localStorage.getItem('filterValues'));
 
@@ -135,5 +136,4 @@
             }
         }
     });
-
 </script>
