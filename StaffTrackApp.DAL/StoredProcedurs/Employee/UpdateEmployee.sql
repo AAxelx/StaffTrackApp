@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE UpdateEmployeeDetails
+﻿CREATE PROCEDURE UpdateEmployee
     @EmployeeId INT,
     @DepartmentId INT,
     @PositionId INT,
@@ -7,8 +7,7 @@
     @Phone NVARCHAR(20),
     @DateOfBirth DATE,
     @EmploymentDate DATE,
-    @Salary DECIMAL(10, 2),
-    @CompanyInfoId INT
+    @Salary DECIMAL(10, 2)
 AS
 BEGIN
     UPDATE Employees
@@ -20,8 +19,7 @@ BEGIN
         Phone = @Phone,
         DateOfBirth = @DateOfBirth,
         EmploymentDate = @EmploymentDate,
-        Salary = @Salary,
-        CompanyInfoId = @CompanyInfoId
+        Salary = @Salary
     WHERE ID = @EmployeeId;
 END;
 

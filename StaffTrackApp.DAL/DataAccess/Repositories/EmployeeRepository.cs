@@ -26,8 +26,27 @@ namespace StaffTrackApp.DAL.DataAccess.Repositories
             var parameter = new SqlParameter("@EmployeeId", SqlDbType.Int) { Value = employeeId };
             var result = await _proceduresHelper.ExecuteStoredProcedureAsync("GetEmployeeById", [parameter]);
 
-            var employee = _mapper.Map<Employee>(result.AsEnumerable().FirstOrDefault());
-            return employee;
+            if (result.Rows.Count > 0)
+            {
+                var row = result.Rows[0];
+
+                var employee = new Employee
+                {
+                    Id = Convert.ToInt32(row["Id"]),
+                    DepartmentId = Convert.ToInt32(row["DepartmentId"]),
+                    PositionId = Convert.ToInt32(row["PositionId"]),
+                    FullName = row["FullName"].ToString(),
+                    Address = row["Address"].ToString(),
+                    Phone = row["Phone"].ToString(),
+                    DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]),
+                    EmploymentDate = Convert.ToDateTime(row["EmploymentDate"]),
+                    Salary = Convert.ToDecimal(row["Salary"])
+                };
+
+                return employee;
+            }
+
+            return null;
         }
 
         public async Task<List<Employee>> GetEmployeesAsync(GetEmployeesRequest request)
@@ -61,7 +80,7 @@ namespace StaffTrackApp.DAL.DataAccess.Repositories
                     FullName = row["FullName"].ToString(),
                     Address = row["Address"].ToString(),
                     Phone = row["Phone"].ToString(),
-                    DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).Date,
+                    DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]),
                     EmploymentDate = Convert.ToDateTime(row["EmploymentDate"]),
                     Salary = Convert.ToDecimal(row["Salary"])
                 };
@@ -87,7 +106,7 @@ namespace StaffTrackApp.DAL.DataAccess.Repositories
                 new("@Salary", SqlDbType.Decimal) { Value = updatedEmployee.Salary }
             };
 
-            await _proceduresHelper.ExecuteStoredProcedureAsync("UpdateEmployeeDetails", parameters);
+            await _proceduresHelper.ExecuteStoredProcedureAsync("UpdateEmployee", parameters);
         }
 
         public async Task RemoveDuplicateEmployeesAsync()
