@@ -7,6 +7,7 @@ using StaffTrackApp.SAL.Helpers;
 using StaffTrackApp.SAL.Helpers.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using StaffTrackApp.DAL.DataAccess.Repositories;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,10 @@ builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<ISalaryRepository, SalaryRepository>();
 builder.Services.AddTransient<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddTransient<IPositionRepository, PositionRepository>();
+
+builder.Services.AddDbContext<StaffDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
 
 var app = builder.Build();
 
