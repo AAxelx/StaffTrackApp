@@ -20,6 +20,11 @@ namespace StaffTrackApp.SAL.Services
         {
             var employee = await _employeeRepository.GetEmployeeByIdAsync(employeeId);//add check for 404
 
+            if(employee == null)
+            {
+                return new ServiceValueResult<Employee>(ResponseType.NotFound);
+            }
+
             return new ServiceValueResult<Employee>(employee);
         }
 
